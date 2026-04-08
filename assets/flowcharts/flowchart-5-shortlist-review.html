@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5. Shortlist Review UI — CasperHire Flow</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700&display=swap');
+  :root{--blue:#3B82F6;--green:#22C55E;--orange:#F59E0B;--purple:#8B5CF6;--red:#EF4444;--teal:#0D9488;--gray-50:#F9FAFB;--gray-200:#E5E7EB;--gray-500:#6B7280;--gray-700:#374151;--gray-900:#111827;--connector:#94A3B8;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'DM Sans',sans-serif;background:var(--gray-50);color:var(--gray-900);padding:48px 32px;min-height:100vh;}
+  .page-header{text-align:center;margin-bottom:40px;}
+  .page-header h1{font-size:28px;font-weight:700;letter-spacing:-0.5px;margin-bottom:6px;}
+  .page-header .subtitle{font-size:14px;color:var(--gray-500);font-weight:400;line-height:1.5;}
+  .page-header .section-label{display:inline-block;background:var(--blue);color:#fff;font-size:11px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;padding:4px 12px;border-radius:100px;margin-bottom:12px;}
+  .legend{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-bottom:48px;padding:16px 24px;background:#fff;border:1px solid var(--gray-200);border-radius:12px;max-width:860px;margin-left:auto;margin-right:auto;}
+  .legend-item{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--gray-700);font-weight:500;}
+  .legend-shape{width:28px;height:20px;flex-shrink:0;}
+  .flow-wrapper{display:flex;justify-content:center;overflow:auto;padding:16px;}
+</style>
+</head>
+<body>
+<div class="page-header">
+  <div class="section-label">WBS Section 5 of 7</div>
+  <h1>Shortlist Review UI</h1>
+  <div class="subtitle">Leo's primary workspace for acting on screening results. Ranked candidates,<br>score overrides, and bulk actions. Jay has read-only audit access.</div>
+</div>
+<div class="legend">
+  <div class="legend-item"><svg class="legend-shape" viewBox="0 0 28 20"><rect x="1" y="1" width="26" height="18" rx="9" fill="var(--blue)"/></svg>Start / End</div>
+  <div class="legend-item"><svg class="legend-shape" viewBox="0 0 28 20"><rect x="1" y="1" width="26" height="18" rx="3" fill="var(--teal)"/></svg>Process</div>
+  <div class="legend-item"><svg class="legend-shape" viewBox="0 0 28 20"><polygon points="14,1 27,10 14,19 1,10" fill="var(--orange)"/></svg>Decision</div>
+  <div class="legend-item"><svg class="legend-shape" viewBox="0 0 28 20"><polygon points="5,19 1,1 23,1 27,19" fill="var(--purple)"/></svg>Output / Display</div>
+  <div class="legend-item"><svg class="legend-shape" viewBox="0 0 28 20"><rect x="1" y="1" width="26" height="18" rx="9" fill="var(--green)"/></svg>Success / End</div>
+  <div class="legend-item"><svg class="legend-shape" viewBox="0 0 28 20"><rect x="1" y="1" width="26" height="18" rx="3" fill="#6366F1"/></svg>Jay (Decision Maker)</div>
+</div>
+<div class="flow-wrapper">
+<svg viewBox="0 0 900 1500" width="900" height="1500" xmlns="http://www.w3.org/2000/svg" font-family="'DM Sans', sans-serif">
+
+  <rect x="290" y="20" width="300" height="48" rx="24" fill="var(--blue)"/>
+  <text x="440" y="49" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">Scored candidates ready (from §4)</text>
+
+  <line x1="440" y1="68" x2="440" y2="110" stroke="var(--connector)" stroke-width="2"/>
+  <polygon points="434,108 440,118 446,108" fill="var(--connector)"/>
+
+  <polygon points="345,125 325,200 555,200 535,125" fill="var(--purple)" stroke="#7C3AED" stroke-width="2"/>
+  <text x="440" y="150" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Display ranked shortlist</text>
+  <text x="440" y="167" text-anchor="middle" fill="#fff" font-size="11" opacity="0.85">Sorted by score (desc)</text>
+  <text x="440" y="183" text-anchor="middle" fill="#fff" font-size="11" opacity="0.85">Score + rationale visible inline</text>
+
+  <rect x="590" y="130" width="200" height="55" rx="6" fill="#fff" stroke="var(--blue)" stroke-width="1.5" stroke-dasharray="5"/>
+  <text x="690" y="148" text-anchor="middle" fill="var(--gray-700)" font-size="10" font-weight="600">Filterable by:</text>
+  <text x="690" y="162" text-anchor="middle" fill="var(--gray-700)" font-size="10" font-style="italic">Score range, deal-breaker status,</text>
+  <text x="690" y="176" text-anchor="middle" fill="var(--gray-700)" font-size="10" font-style="italic">parse confidence level</text>
+
+  <line x1="440" y1="200" x2="440" y2="240" stroke="var(--connector)" stroke-width="2"/>
+  <polygon points="434,238 440,248 446,238" fill="var(--connector)"/>
+
+  <rect x="300" y="250" width="280" height="55" rx="6" fill="var(--teal)" stroke="#0F766E" stroke-width="2"/>
+  <text x="440" y="273" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Leo selects candidate</text>
+  <text x="440" y="290" text-anchor="middle" fill="#fff" font-size="11" opacity="0.85">Expand row → full resume + rationale</text>
+
+  <line x1="440" y1="305" x2="440" y2="345" stroke="var(--connector)" stroke-width="2"/>
+  <polygon points="434,343 440,353 446,343" fill="var(--connector)"/>
+
+  <polygon points="440,355 560,420 440,485 320,420" fill="var(--orange)" stroke="#D97706" stroke-width="2"/>
+  <text x="440" y="413" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">Override</text>
+  <text x="440" y="428" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">AI score?</text>
+
+  <line x1="560" y1="420" x2="668" y2="420" stroke="var(--connector)" stroke-width="2"/>
+  <polygon points="666,414 676,420 666,426" fill="var(--connector)"/>
+  <text x="614" y="410" text-anchor="middle" fill="var(--gray-500)" font-size="11" font-weight="600">Yes</text>
+
+  <rect x="680" y="388" width="170" height="65" rx="6" fill="var(--teal)" stroke="#0F766E" stroke-width="2"/>
+  <text x="765" y="412" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">Score Override</text>
+  <text x="765" y="428" text-anchor="middle" fill="#fff" font-size="10" opacity="0.85">New score (1–10) +</text>
+  <text x="765" y="441" text-anchor="middle" fill="#fff" font-size="10" opacity="0.85">required note</text>
+
+  <!-- Override rejoins — lines first, then annotation on top -->
+  <line x1="765" y1="453" x2="765" y2="530" stroke="var(--connector)" stroke-width="2" stroke-dasharray="6"/>
+  <line x1="765" y1="530" x2="440" y2="530" stroke="var(--connector)" stroke-width="2" stroke-dasharray="6"/>
+
+  <!-- Annotation ON TOP of lines -->
+  <rect x="688" y="462" width="155" height="35" rx="6" fill="#fff" stroke="var(--orange)" stroke-width="1.5" stroke-dasharray="5"/>
+  <text x="765" y="478" text-anchor="middle" fill="var(--gray-700)" font-size="10" font-style="italic">Display: "AI: 7 → Leo: 4"</text>
+  <text x="765" y="491" text-anchor="middle" fill="var(--gray-700)" font-size="10" font-style="italic">Original preserved, not deleted</text>
+
+  <line x1="440" y1="485" x2="440" y2="530" stroke="var(--connector)" stroke-width="2"/>
+  <text x="455" y="512" fill="var(--gray-500)" font-size="11" font-weight="600">No</text>
+  <circle cx="440" cy="530" r="5" fill="var(--connector)"/>
+  <line x1="440" y1="535" x2="440" y2="575" stroke="var(--connector)" stroke-width="2"/>
+  <polygon points="434,573 440,583 446,573" fill="var(--connector)"/>
+
+  <polygon points="440,585 580,665 440,745 300,665" fill="var(--orange)" stroke="#D97706" stroke-width="2"/>
+  <text x="440" y="658" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">Leo's</text>
+  <text x="440" y="673" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">decision?</text>
+
+  <!-- Reject — oval terminator -->
+  <line x1="300" y1="665" x2="168" y2="665" stroke="var(--connector)" stroke-width="2"/>
+  <polygon points="170,659 160,665 170,671" fill="var(--connector)"/>
+  <text x="234" y="655" text-anchor="middle" fill="var(--gray-500)" font-size="11" font-weight="600">Reject</text>
+  <rect x="30" y="644" width="130" height="42" rx="21" fill="var(--gray-500)"/>
+  <text x="95" y="663" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">Rejected</text>
+  <text x="95" y="677" text-anchor="middle" fill="#fff" font-size="10" opacity="0.85">Hidden, not deleted</text>
+
+  <!-- Flag — oval terminator -->
+  <line x1="580" y1="665" x2="698" y2="665" stroke="var(--connector)" stroke-width="2"/>
+  <polygon points="696,659 706,665 696,671" fill="var(--connector)"/>
+  <text x="639" y="655" text-anchor="middle" fill="var(--gray-500)" font-size="11" font-weight="600">Flag</text>
+  <rect x="710" y="644" width="150" height="42" rx="21" fill="var(--orange)"/>
+  <text x="785" y="663" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">Flagged</text>
+  <text x="785" y="677" text-anchor="middle" fill="#fff" font-size="10" opacity="0.85">Review later</text>
+
+  <!-- Approve -->
+  <line x1="440" y1="745" x2="440" y2="785" stroke="var(--connector)" stroke-width="2"/>
+  <polygon points="434,783 440,793 446,783" fill="var(--connector)"/>
+  <text x="455" y="772" fill="var(--gray-500)" font-size="11" font-weight="600">Approve</text>
+
+  <rect x="575" y="738" width="180" height="45" rx="6" fill="#fff" stroke="var(--orange)" stroke-width="1.5" stroke-dasharray="5"/>
+  <text x="665" y="756" text-anchor="middle" fill="var(--gray-700)" font-size="10" font-weight="600">All states are reversible</text>
+  <text x="665" y="770" text-anchor="middle" fill="var(--gray-700)" font-size="10" font-style="italic">until CRM handoff (§7)</text>
+
+  <rect x="300" y="795" width="280" height="50" rx="6" fill="var(--green)" stroke="#16A34A" stroke-width="2"/>
+  <text x="440" y="816" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Candidate Approved ✓</text>
+  <text x="440" y="833" text-anchor="middle" fill="#fff" font-size="11" opacity="0.85">→ Advance to phone screen</text>
+
+  <line x1="440" y1="845" x2="440" y2="885" stroke="var(--connector)" stroke-width="2"/>
+  <polygon points="434,883 440,893 446,883" fill="var(--connector)"/>
+
+  <polygon points="440,895 540,940 440,985 340,940" fill="var(--orange)" stroke="#D97706" stroke-width="2"/>
+  <text x="440" y="935" text-anchor="middle" fill="#fff" font-size="11" font-weight="600">More to</text>
+  <text x="440" y="949" text-anchor="middle" fill="#fff" font-size="11" font-weight="600">review?</text>
+
+  <line x1="540" y1="940" x2="610" y2="940" stroke="var(--connector)" stroke-width="2" stroke-dasharray="6"/>
+  <line x1="610" y1="940" x2="610" y2="165" stroke="var(--connector)" stroke-width="2" stroke-dasharray="6"/>
+  <line x1="610" y1="165" x2="557" y2="165" stroke="var(--connector)" stroke-width="2" stroke-dasharray="6"/>
+  <polygon points="559,159 549,165 559,171" fill="var(--connector)"/>
+  <rect x="578" y="548" width="65" height="18" rx="4" fill="#fff"/>
+  <text x="610" y="561" text-anchor="middle" fill="var(--gray-500)" font-size="10" font-weight="600">Yes</text>
+
+  <line x1="440" y1="985" x2="440" y2="1025" stroke="var(--connector)" stroke-width="2"/>
+  <polygon points="434,1023 440,1033 446,1023" fill="var(--connector)"/>
+  <text x="455" y="1010" fill="var(--gray-500)" font-size="11" font-weight="600">No</text>
+
+  <rect x="270" y="1035" width="340" height="48" rx="24" fill="var(--green)"/>
+  <text x="440" y="1064" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">→ Review complete · CRM handoff (§7)</text>
+
+  <!-- JAY -->
+  <rect x="270" y="1120" width="340" height="8" rx="2" fill="var(--gray-200)"/>
+  <text x="440" y="1155" text-anchor="middle" fill="var(--gray-700)" font-size="16" font-weight="700">Jay's View (Decision Maker)</text>
+  <text x="440" y="1175" text-anchor="middle" fill="var(--gray-500)" font-size="12">Parallel path — read-only audit access</text>
+
+  <rect x="310" y="1200" width="260" height="48" rx="24" fill="#6366F1"/>
+  <text x="440" y="1229" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Jay opens shortlist</text>
+
+  <line x1="440" y1="1248" x2="440" y2="1280" stroke="var(--connector)" stroke-width="2"/>
+  <polygon points="434,1278 440,1288 446,1278" fill="var(--connector)"/>
+
+  <polygon points="345,1295 325,1375 555,1375 535,1295" fill="#6366F1" stroke="#4F46E5" stroke-width="2"/>
+  <text x="440" y="1318" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">Read-only view</text>
+  <text x="440" y="1335" text-anchor="middle" fill="#fff" font-size="10" opacity="0.85">Scores, rationale, Leo's overrides</text>
+  <text x="440" y="1350" text-anchor="middle" fill="#fff" font-size="10" opacity="0.85">Filter by role, score, status</text>
+
+  <line x1="440" y1="1375" x2="440" y2="1405" stroke="var(--connector)" stroke-width="2"/>
+  <polygon points="434,1403 440,1413 446,1403" fill="var(--connector)"/>
+
+  <rect x="300" y="1415" width="280" height="55" rx="6" fill="#6366F1" stroke="#4F46E5" stroke-width="2"/>
+  <text x="440" y="1438" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">Leave comments / notes</text>
+  <text x="440" y="1455" text-anchor="middle" fill="#fff" font-size="10" opacity="0.85">Async feedback → visible to Leo</text>
+  <text x="440" y="1468" text-anchor="middle" fill="#fff" font-size="10" opacity="0.85">No approve/reject actions for Jay</text>
+
+</svg>
+</div>
+</body>
+</html>

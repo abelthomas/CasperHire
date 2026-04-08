@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>6. Screening Analytics — CasperHire Flow</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700&display=swap');
+  :root{--blue:#3B82F6;--green:#22C55E;--orange:#F59E0B;--purple:#8B5CF6;--red:#EF4444;--teal:#0D9488;--gray-50:#F9FAFB;--gray-200:#E5E7EB;--gray-500:#6B7280;--gray-700:#374151;--gray-900:#111827;--connector:#94A3B8;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'DM Sans',sans-serif;background:var(--gray-50);color:var(--gray-900);padding:48px 32px;min-height:100vh;}
+  .page-header{text-align:center;margin-bottom:40px;}
+  .page-header h1{font-size:28px;font-weight:700;letter-spacing:-0.5px;margin-bottom:6px;}
+  .page-header .subtitle{font-size:14px;color:var(--gray-500);font-weight:400;line-height:1.5;}
+  .page-header .section-label{display:inline-block;background:var(--blue);color:#fff;font-size:11px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;padding:4px 12px;border-radius:100px;margin-bottom:12px;}
+  .legend{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-bottom:48px;padding:16px 24px;background:#fff;border:1px solid var(--gray-200);border-radius:12px;max-width:860px;margin-left:auto;margin-right:auto;}
+  .legend-item{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--gray-700);font-weight:500;}
+  .legend-shape{width:28px;height:20px;flex-shrink:0;}
+  .flow-wrapper{display:flex;justify-content:center;overflow:auto;padding:16px;}
+</style>
+</head>
+<body>
+<div class="page-header">
+  <div class="section-label">WBS Section 6 of 7</div>
+  <h1>Screening Analytics</h1>
+  <div class="subtitle">Track AI quality, measure efficiency gains, and validate screening outcomes.<br>Feeds directly into the AI Evaluation Plan's post-launch dashboard.</div>
+</div>
+<div class="legend">
+  <div class="legend-item"><svg class="legend-shape" viewBox="0 0 28 20"><rect x="1" y="1" width="26" height="18" rx="9" fill="var(--blue)"/></svg>Start / End</div>
+  <div class="legend-item"><svg class="legend-shape" viewBox="0 0 28 20"><rect x="1" y="1" width="26" height="18" rx="3" fill="var(--teal)"/></svg>Process</div>
+  <div class="legend-item"><svg class="legend-shape" viewBox="0 0 28 20"><polygon points="14,1 27,10 14,19 1,10" fill="var(--orange)"/></svg>Decision</div>
+  <div class="legend-item"><svg class="legend-shape" viewBox="0 0 28 20"><polygon points="5,19 1,1 23,1 27,19" fill="var(--purple)"/></svg>Output / Display</div>
+  <div class="legend-item"><svg class="legend-shape" viewBox="0 0 28 20"><rect x="1" y="1" width="26" height="18" rx="3" fill="#6366F1"/></svg>Jay (Decision Maker)</div>
+</div>
+<div class="flow-wrapper">
+<svg viewBox="0 0 1020 1260" width="1020" height="1260" xmlns="http://www.w3.org/2000/svg" font-family="'DM Sans', sans-serif">
+
+  <!-- Main at x=490 -->
+  <rect x="340" y="20" width="300" height="48" rx="24" fill="var(--blue)"/>
+  <text x="490" y="49" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">Screening activity generates data</text>
+
+  <line x1="490" y1="68" x2="490" y2="110" stroke="var(--connector)" stroke-width="2"/>
+  <polygon points="484,108 490,118 496,108" fill="var(--connector)"/>
+
+  <rect x="350" y="120" width="280" height="70" rx="6" fill="var(--teal)" stroke="#0F766E" stroke-width="2"/>
+  <text x="490" y="145" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Aggregate screening events</text>
+  <text x="490" y="162" text-anchor="middle" fill="#fff" font-size="11" opacity="0.85">Scores, overrides, timestamps,</text>
+  <text x="490" y="176" text-anchor="middle" fill="#fff" font-size="11" opacity="0.85">approvals, rejections, failures</text>
+
+  <line x1="490" y1="190" x2="490" y2="225" stroke="var(--connector)" stroke-width="2"/>
+  <text x="490" y="245" text-anchor="middle" fill="var(--gray-700)" font-size="12" font-weight="700">Three metric streams:</text>
+
+  <!-- Branch lines: LEFT=80, CENTER=490, RIGHT=870 -->
+  <line x1="490" y1="255" x2="80" y2="300" stroke="var(--connector)" stroke-width="2"/>
+  <line x1="490" y1="255" x2="490" y2="300" stroke="var(--connector)" stroke-width="2"/>
+  <line x1="490" y1="255" x2="870" y2="300" stroke="var(--connector)" stroke-width="2"/>
+
+  <!-- STREAM 1: Override Tracking (x=80) -->
+  <polygon points="0,310 -20,410 180,410 160,310" fill="var(--purple)" stroke="#7C3AED" stroke-width="2"/>
+  <text x="80" y="335" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">① Override Tracking</text>
+  <text x="80" y="352" text-anchor="middle" fill="#fff" font-size="10" opacity="0.85">• Override rate (%)</text>
+  <text x="80" y="366" text-anchor="middle" fill="#fff" font-size="10" opacity="0.85">• Avg score delta (±)</text>
+  <text x="80" y="380" text-anchor="middle" fill="#fff" font-size="10" opacity="0.85">• Direction: up vs. down</text>
+  <text x="80" y="394" text-anchor="middle" fill="#fff" font-size="10" opacity="0.85">• Distribution by score range</text>
+
+  <line x1="80" y1="410" x2="80" y2="445" stroke="var(--connector)" stroke-width="2"/>
+  <polygon points="74,443 80,453 86,443" fill="var(--connector)"/>
+
+  <polygon points="80,455 160,500 80,545 0,500" fill="var(--orange)" stroke="#D97706" stroke-width="2"/>
+  <text x="80" y="495" text-anchor="middle" fill="#fff" font-size="10" font-weight="600">Override</text>
+  <text x="80" y="509" text-anchor="middle" fill="#fff" font-size="10" font-weight="600">> 30%?</text>
+
+  <!-- Alert — to the right of override decision, but still left of center -->
+  <line x1="160" y1="500" x2="228" y2="500" stroke="var(--connector)" stroke-width="2"/>
+  <polygon points="226,494 236,500 226,506" fill="var(--connector)"/>
+  <text x="194" y="490" text-anchor="middle" fill="var(--gray-500)" font-size="10" font-weight="600">Yes</text>
+
+  <rect x="240" y="478" width="120" height="44" rx="6" fill="var(--red)" stroke="#DC2626" stroke-width="2"/>
+  <text x="300" y="496" text-anchor="middle" fill="#fff" font-size="11" font-weight="600">⚠ UI Warning</text>
+  <text x="300" y="511" text-anchor="middle" fill="#fff" font-size="9" opacity="0.85">Review rubric/prompt</text>
+
+  <!-- Pattern detection annotation -->
+  <rect x="0" y="558" width="240" height="50" rx="6" fill="#fff" stroke="var(--orange)" stroke-width="1.5" stroke-dasharray="5"/>
+  <text x="120" y="576" text-anchor="middle" fill="var(--gray-700)" font-size="10" font-weight="600">Pattern detection:</text>
+  <text x="120" y="590" text-anchor="middle" fill="var(--gray-700)" font-size="10" font-style="italic">Consistently ↑ = rubric too strict</text>
+  <text x="120" y="603" text-anchor="middle" fill="var(--gray-700)" font-size="9" font-style="italic">Consistently ↓ = rubric too lenient</text>
+
+  <!-- STREAM 2: Throughput (x=490) -->
+  <polygon points="390,310 370,410 610,410 590,310" fill="var(--purple)" stroke="#7C3AED" stroke-width="2"/>
+  <text x="490" y="335" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">② Screening Throughput</text>
+  <text x="490" y="352" text-anchor="middle" fill="#fff" font-size="10" opacity="0.85">• Resumes processed / role</text>
+  <text x="490" y="366" text-anchor="middle" fill="#fff" font-size="10" opacity="0.85">• Avg time: upload → shortlist</text>
+  <text x="490" y="380" text-anchor="middle" fill="#fff" font-size="10" opacity="0.85">• Resumes / hour rate</text>
+  <text x="490" y="394" text-anchor="middle" fill="#fff" font-size="10" opacity="0.85">• Parse &amp; scoring failure rates</text>
+
+  <line x1="490" y1="410" x2="490" y2="448" stroke="var(--connector)" stroke-width="2"/>
+  <polygon points="484,446 490,456 496,446" fill="var(--connector)"/>
+
+  <rect x="395" y="458" width="190" height="55" rx="6" fill="var(--teal)" stroke="#0F766E" stroke-width="2"/>
+  <text x="490" y="481" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">Baseline comparison</text>
+  <text x="490" y="497" text-anchor="middle" fill="#fff" font-size="10" opacity="0.85">Manual: 80–100 hrs/hire</text>
+  <text x="490" y="510" text-anchor="middle" fill="#fff" font-size="10" opacity="0.85">vs. actual AI-assisted time</text>
+
+  <!-- STREAM 3: Funnel Conversion (x=870) -->
+  <polygon points="770,310 750,410 990,410 970,310" fill="var(--purple)" stroke="#7C3AED" stroke-width="2"/>
+  <text x="870" y="335" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">③ Funnel Conversion</text>
+  <text x="870" y="352" text-anchor="middle" fill="#fff" font-size="10" opacity="0.85">• % advancing each stage</text>
+  <text x="870" y="366" text-anchor="middle" fill="#fff" font-size="10" opacity="0.85">• Approved → Phone → Tech</text>
+  <text x="870" y="380" text-anchor="middle" fill="#fff" font-size="10" opacity="0.85">   → Panel → Offer → Hired</text>
+  <text x="870" y="394" text-anchor="middle" fill="#fff" font-size="10" opacity="0.85">• Breakdown by AI score range</text>
+
+  <line x1="870" y1="410" x2="870" y2="448" stroke="var(--connector)" stroke-width="2"/>
+  <polygon points="864,446 870,456 876,446" fill="var(--connector)"/>
+
+  <rect x="775" y="458" width="190" height="55" rx="6" fill="#fff" stroke="var(--orange)" stroke-width="1.5" stroke-dasharray="5"/>
+  <text x="870" y="476" text-anchor="middle" fill="var(--gray-700)" font-size="10" font-weight="600">Calibration signal:</text>
+  <text x="870" y="490" text-anchor="middle" fill="var(--gray-700)" font-size="10" font-style="italic">Do 9–10 candidates convert</text>
+  <text x="870" y="504" text-anchor="middle" fill="var(--gray-700)" font-size="10" font-style="italic">higher than 7–8? If not →</text>
+
+  <!-- Merge streams -->
+  <line x1="80" y1="620" x2="80" y2="680" stroke="var(--connector)" stroke-width="2"/>
+  <line x1="490" y1="513" x2="490" y2="680" stroke="var(--connector)" stroke-width="2"/>
+  <line x1="870" y1="520" x2="870" y2="680" stroke="var(--connector)" stroke-width="2"/>
+  <line x1="80" y1="680" x2="870" y2="680" stroke="var(--connector)" stroke-width="2"/>
+  <circle cx="490" cy="680" r="5" fill="var(--connector)"/>
+  <line x1="490" y1="685" x2="490" y2="720" stroke="var(--connector)" stroke-width="2"/>
+  <polygon points="484,718 490,728 496,718" fill="var(--connector)"/>
+
+  <!-- Leo's Dashboard -->
+  <polygon points="385,735 365,820 615,820 595,735" fill="var(--purple)" stroke="#7C3AED" stroke-width="2"/>
+  <text x="490" y="762" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">Leo's Analytics Dashboard</text>
+  <text x="490" y="779" text-anchor="middle" fill="#fff" font-size="11" opacity="0.85">All 3 streams unified</text>
+  <text x="490" y="795" text-anchor="middle" fill="#fff" font-size="11" opacity="0.85">Filterable by role + time period</text>
+  <text x="490" y="811" text-anchor="middle" fill="#fff" font-size="10" opacity="0.85">CSV export available</text>
+
+  <line x1="490" y1="820" x2="490" y2="858" stroke="var(--connector)" stroke-width="2"/>
+  <polygon points="484,856 490,866 496,856" fill="var(--connector)"/>
+
+  <rect x="350" y="868" width="280" height="45" rx="6" fill="#fff" stroke="var(--blue)" stroke-width="1.5" stroke-dasharray="5"/>
+  <text x="490" y="886" text-anchor="middle" fill="var(--gray-700)" font-size="11" font-weight="600">🔗 Feeds into AI Evaluation Plan</text>
+  <text x="490" y="902" text-anchor="middle" fill="var(--gray-700)" font-size="10" font-style="italic">Post-launch 8-metric dashboard</text>
+
+  <!-- Divider -->
+  <rect x="330" y="950" width="320" height="8" rx="2" fill="var(--gray-200)"/>
+
+  <text x="490" y="985" text-anchor="middle" fill="var(--gray-700)" font-size="16" font-weight="700">Jay's Executive Summary</text>
+  <text x="490" y="1005" text-anchor="middle" fill="var(--gray-500)" font-size="12">Accessible from main dashboard — no drill-down required</text>
+
+  <rect x="360" y="1025" width="260" height="48" rx="24" fill="#6366F1"/>
+  <text x="490" y="1053" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Jay opens dashboard</text>
+
+  <line x1="490" y1="1073" x2="490" y2="1105" stroke="var(--connector)" stroke-width="2"/>
+  <polygon points="484,1103 490,1113 496,1103" fill="var(--connector)"/>
+
+  <polygon points="390,1120 370,1210 610,1210 590,1120" fill="#6366F1" stroke="#4F46E5" stroke-width="2"/>
+  <text x="490" y="1147" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">Executive Summary View</text>
+  <text x="490" y="1164" text-anchor="middle" fill="#fff" font-size="10" opacity="0.85">Total candidates screened</text>
+  <text x="490" y="1178" text-anchor="middle" fill="#fff" font-size="10" opacity="0.85">Estimated hours saved</text>
+  <text x="490" y="1192" text-anchor="middle" fill="#fff" font-size="10" opacity="0.85">Override rate · Pipeline conversion</text>
+
+</svg>
+</div>
+</body>
+</html>

@@ -1,0 +1,1486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CasperHire — Wireframe Prototype</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+  :root {
+    --bg: #F7F7F7;
+    --surface: #FFFFFF;
+    --border: #E0E0E0;
+    --border-strong: #C4C4C4;
+    --text-primary: #1A1A1A;
+    --text-secondary: #6B6B6B;
+    --text-muted: #999999;
+    --accent: #2D2D2D;
+    --accent-light: #F0F0F0;
+    --green: #34A853;
+    --green-bg: #E8F5E9;
+    --orange: #E8A317;
+    --orange-bg: #FFF8E1;
+    --red: #D93025;
+    --red-bg: #FDECEA;
+    --blue: #4285F4;
+    --blue-bg: #E3F2FD;
+    --sidebar-w: 240px;
+    --header-h: 56px;
+    --radius: 6px;
+    --font: 'IBM Plex Sans', -apple-system, sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text-primary);
+    font-size: 13px;
+    line-height: 1.5;
+    display: flex;
+    min-height: 100vh;
+  }
+
+  /* ===== SIDEBAR ===== */
+  .sidebar {
+    width: var(--sidebar-w);
+    background: var(--accent);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 10;
+  }
+  .sidebar-logo {
+    padding: 20px 20px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .sidebar-logo h1 {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+  .sidebar-logo span {
+    font-size: 11px;
+    opacity: 0.5;
+    font-weight: 400;
+    display: block;
+    margin-top: 2px;
+  }
+
+  .sidebar-section {
+    padding: 16px 12px 8px;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.4;
+    font-weight: 600;
+  }
+
+  .sidebar-nav { list-style: none; padding: 0 8px; }
+  .sidebar-nav li {
+    margin-bottom: 2px;
+  }
+  .sidebar-nav a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 12px;
+    border-radius: 5px;
+    color: rgba(255,255,255,0.65);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.15s;
+    cursor: pointer;
+  }
+  .sidebar-nav a:hover {
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+  }
+  .sidebar-nav a.active {
+    background: rgba(255,255,255,0.12);
+    color: #fff;
+  }
+  .sidebar-nav .nav-icon {
+    font-size: 16px;
+    width: 20px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .sidebar-nav .nav-badge {
+    margin-left: auto;
+    background: rgba(255,255,255,0.15);
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-family: var(--mono);
+  }
+
+  .sidebar-user {
+    margin-top: auto;
+    padding: 16px 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .sidebar-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+  .sidebar-user-info {
+    font-size: 12px;
+  }
+  .sidebar-user-info .name { font-weight: 600; }
+  .sidebar-user-info .role { opacity: 0.5; font-size: 11px; }
+
+  /* ===== MAIN ===== */
+  .main {
+    margin-left: var(--sidebar-w);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .topbar {
+    height: var(--header-h);
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 0 28px;
+    gap: 16px;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+  }
+  .topbar h2 {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+  }
+  .topbar .breadcrumb {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  .topbar .breadcrumb span { color: var(--text-primary); font-weight: 600; }
+  .topbar-actions {
+    margin-left: auto;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .btn {
+    padding: 7px 14px;
+    border-radius: var(--radius);
+    font-size: 12px;
+    font-weight: 600;
+    font-family: var(--font);
+    cursor: pointer;
+    border: 1px solid var(--border-strong);
+    background: var(--surface);
+    color: var(--text-primary);
+    transition: all 0.15s;
+  }
+  .btn:hover { background: var(--accent-light); }
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
+  .btn-primary:hover { opacity: 0.85; }
+
+  .content { padding: 28px; flex: 1; }
+
+  /* ===== DASHBOARD VIEW ===== */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+  }
+  .stat-card .stat-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .stat-card .stat-value {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    font-family: var(--mono);
+  }
+  .stat-card .stat-change {
+    font-size: 11px;
+    margin-top: 4px;
+    font-weight: 500;
+  }
+  .stat-card .stat-change.positive { color: var(--green); }
+  .stat-card .stat-change.neutral { color: var(--text-muted); }
+
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 16px;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .card-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .card-header h3 {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: -0.2px;
+  }
+  .card-header .card-meta {
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+  .card-body { padding: 20px; }
+
+  /* Pipeline funnel */
+  .funnel-stage {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .funnel-stage:last-child { margin-bottom: 0; }
+  .funnel-label {
+    width: 120px;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .funnel-bar-wrap {
+    flex: 1;
+    height: 24px;
+    background: var(--accent-light);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+  }
+  .funnel-bar {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 4px;
+    opacity: 0.7;
+    transition: width 0.6s ease;
+  }
+  .funnel-count {
+    width: 40px;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: var(--mono);
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  /* Activity feed */
+  .activity-item {
+    display: flex;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--accent-light);
+    font-size: 12px;
+  }
+  .activity-item:last-child { border-bottom: none; }
+  .activity-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-top: 5px;
+    flex-shrink: 0;
+  }
+  .activity-time {
+    color: var(--text-muted);
+    font-size: 11px;
+    margin-top: 2px;
+    font-family: var(--mono);
+  }
+
+  /* ===== SHORTLIST VIEW ===== */
+  .filters-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+  .filter-chip {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .filter-chip.active {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
+  .filter-chip .chip-count {
+    font-family: var(--mono);
+    font-size: 10px;
+    opacity: 0.7;
+  }
+
+  .shortlist-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .shortlist-table thead {
+    background: var(--accent-light);
+  }
+  .shortlist-table th {
+    padding: 10px 16px;
+    text-align: left;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  .shortlist-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--accent-light);
+    font-size: 13px;
+    vertical-align: middle;
+  }
+  .shortlist-table tbody tr:hover {
+    background: #FAFAFA;
+  }
+  .shortlist-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .candidate-name {
+    font-weight: 600;
+    display: block;
+  }
+  .candidate-meta {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 1px;
+  }
+
+  .score-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 24px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 700;
+    font-family: var(--mono);
+  }
+  .score-high { background: var(--green-bg); color: var(--green); }
+  .score-mid { background: var(--orange-bg); color: var(--orange); }
+  .score-low { background: var(--red-bg); color: var(--red); }
+
+  .status-pill {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .status-approved { background: var(--green-bg); color: var(--green); }
+  .status-pending { background: var(--blue-bg); color: var(--blue); }
+  .status-flagged { background: var(--orange-bg); color: var(--orange); }
+  .status-rejected { background: var(--red-bg); color: var(--red); }
+
+  .confidence-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 4px;
+  }
+  .conf-high { background: var(--green); }
+  .conf-low { background: var(--orange); }
+
+  .rationale-text {
+    font-size: 11px;
+    color: var(--text-secondary);
+    max-width: 280px;
+    line-height: 1.4;
+  }
+
+  .override-badge {
+    font-size: 10px;
+    color: var(--text-muted);
+    font-family: var(--mono);
+  }
+
+  /* Row checkbox */
+  .row-check {
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--border-strong);
+    border-radius: 3px;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+  /* Wireframe label */
+  .wireframe-badge {
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+    background: var(--accent);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 20px;
+    z-index: 100;
+    opacity: 0.6;
+  }
+
+  /* View toggle */
+  .view-hidden { display: none !important; }
+
+  /* ===== PROFILE CARD ===== */
+  .profile-layout {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 24px;
+  }
+  .profile-sidebar-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    text-align: center;
+  }
+  .profile-avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: var(--accent-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    margin: 0 auto 16px;
+    border: 2px solid var(--border);
+  }
+  .profile-name {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    margin-bottom: 4px;
+  }
+  .profile-headline {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+  }
+  .profile-score-row {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .profile-score-item {
+    text-align: center;
+  }
+  .profile-score-item .ps-value {
+    font-size: 24px;
+    font-weight: 700;
+    font-family: var(--mono);
+  }
+  .profile-score-item .ps-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-top: 2px;
+  }
+  .profile-detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-size: 12px;
+    border-bottom: 1px solid var(--accent-light);
+  }
+  .profile-detail-row:last-child { border-bottom: none; }
+  .profile-detail-label {
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+  .profile-detail-value {
+    font-weight: 600;
+    text-align: right;
+  }
+  .profile-main-col {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .rationale-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+  .rationale-card .rationale-body {
+    padding: 16px 20px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text-secondary);
+  }
+  .experience-entry {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--accent-light);
+  }
+  .experience-entry:last-child { border-bottom: none; }
+  .exp-company {
+    font-weight: 700;
+    font-size: 13px;
+  }
+  .exp-title {
+    font-size: 12px;
+    color: var(--text-secondary);
+  }
+  .exp-dates {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-family: var(--mono);
+    margin-top: 2px;
+  }
+  .skill-tag {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 500;
+    background: var(--accent-light);
+    color: var(--text-secondary);
+    margin: 3px 4px 3px 0;
+  }
+  .profile-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+  }
+  .btn-approve {
+    background: var(--green);
+    color: #fff;
+    border-color: var(--green);
+  }
+  .btn-reject {
+    background: var(--red);
+    color: #fff;
+    border-color: var(--red);
+  }
+  .btn-flag {
+    background: var(--orange);
+    color: #fff;
+    border-color: var(--orange);
+  }
+
+  /* ===== ROLE DETAIL ===== */
+  .role-detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .role-field {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--accent-light);
+  }
+  .role-field:last-child { border-bottom: none; }
+  .role-field-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .role-field-value {
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .rubric-bar-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .rubric-bar-label {
+    width: 100px;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .rubric-bar-track {
+    flex: 1;
+    height: 20px;
+    background: var(--accent-light);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .rubric-bar-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 4px;
+    opacity: 0.6;
+  }
+  .rubric-bar-pct {
+    width: 40px;
+    font-size: 12px;
+    font-weight: 700;
+    font-family: var(--mono);
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .dealbreaker-tag {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    background: var(--red-bg);
+    color: var(--red);
+    margin: 3px 4px 3px 0;
+  }
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    <h1>CasperHire</h1>
+    <span>Internal Recruiting Platform</span>
+  </div>
+
+  <div class="sidebar-section">Navigation</div>
+  <ul class="sidebar-nav">
+    <li><a id="nav-dashboard" class="active" onclick="showView('dashboard')"><span class="nav-icon">📊</span> Dashboard</a></li>
+    <li><a id="nav-shortlist" onclick="showView('shortlist')"><span class="nav-icon">📋</span> Shortlist <span class="nav-badge">12</span></a></li>
+  </ul>
+
+  <div class="sidebar-section">Manage</div>
+  <ul class="sidebar-nav">
+    <li><a id="nav-roles" onclick="showView('roles')"><span class="nav-icon">🎯</span> Roles <span class="nav-badge">3</span></a></li>
+    <li><a><span class="nav-icon">👥</span> Candidate CRM <span class="nav-badge">47</span></a></li>
+    <li><a><span class="nav-icon">📝</span> Interviews</a></li>
+  </ul>
+
+  <div class="sidebar-section">System</div>
+  <ul class="sidebar-nav">
+    <li><a><span class="nav-icon">⚙️</span> Settings</a></li>
+    <li><a><span class="nav-icon">🔑</span> Permissions</a></li>
+  </ul>
+
+  <div class="sidebar-user">
+    <div class="sidebar-avatar">LK</div>
+    <div class="sidebar-user-info">
+      <div class="name">Leo Kim</div>
+      <div class="role">Operator</div>
+    </div>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- ===== DASHBOARD VIEW ===== -->
+  <div id="view-dashboard">
+    <div class="topbar">
+      <h2>Dashboard</h2>
+      <div class="breadcrumb">CasperHire / <span>Overview</span></div>
+      <div class="topbar-actions">
+        <button class="btn">Export CSV</button>
+        <button class="btn btn-primary">+ New Role</button>
+      </div>
+    </div>
+    <div class="content">
+      <!-- Stats row -->
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-label">Active Candidates</div>
+          <div class="stat-value">47</div>
+          <div class="stat-change positive">+12 this week</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Avg. Time to Shortlist</div>
+          <div class="stat-value">4.2h</div>
+          <div class="stat-change positive">↓ from 3.5 days</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">AI Override Rate</div>
+          <div class="stat-value">18%</div>
+          <div class="stat-change neutral">Within threshold</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Est. Hours Saved</div>
+          <div class="stat-value">62h</div>
+          <div class="stat-change positive">~$9,300 recaptured</div>
+        </div>
+      </div>
+
+      <!-- Dashboard grid -->
+      <div class="dashboard-grid">
+        <!-- Pipeline funnel -->
+        <div class="card">
+          <div class="card-header">
+            <h3>Pipeline Funnel — Sr. Backend Engineer</h3>
+            <div class="card-meta">Last 30 days</div>
+          </div>
+          <div class="card-body">
+            <div class="funnel-stage">
+              <div class="funnel-label">Screened</div>
+              <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:100%"></div></div>
+              <div class="funnel-count">127</div>
+            </div>
+            <div class="funnel-stage">
+              <div class="funnel-label">Approved</div>
+              <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:33%"></div></div>
+              <div class="funnel-count">42</div>
+            </div>
+            <div class="funnel-stage">
+              <div class="funnel-label">Phone Screen</div>
+              <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:18%"></div></div>
+              <div class="funnel-count">23</div>
+            </div>
+            <div class="funnel-stage">
+              <div class="funnel-label">Technical</div>
+              <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:9%"></div></div>
+              <div class="funnel-count">12</div>
+            </div>
+            <div class="funnel-stage">
+              <div class="funnel-label">Panel</div>
+              <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:5%"></div></div>
+              <div class="funnel-count">6</div>
+            </div>
+            <div class="funnel-stage">
+              <div class="funnel-label">Offer</div>
+              <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:2%"></div></div>
+              <div class="funnel-count">2</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Activity feed -->
+        <div class="card">
+          <div class="card-header">
+            <h3>Recent Activity</h3>
+            <div class="card-meta">Today</div>
+          </div>
+          <div class="card-body">
+            <div class="activity-item">
+              <div class="activity-dot" style="background:var(--green)"></div>
+              <div>
+                <div><strong>Maria Chen</strong> approved → Phone Screen</div>
+                <div class="activity-time">10:42 AM</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot" style="background:var(--orange)"></div>
+              <div>
+                <div><strong>Leo</strong> overrode score for <strong>James Park</strong> (AI: 6 → Leo: 8)</div>
+                <div class="activity-time">10:15 AM</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot" style="background:var(--blue)"></div>
+              <div>
+                <div><strong>24 resumes</strong> batch-scored for Sr. Backend role</div>
+                <div class="activity-time">9:30 AM</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot" style="background:var(--red)"></div>
+              <div>
+                <div><strong>2 candidates</strong> rejected — deal-breaker triggered</div>
+                <div class="activity-time">9:28 AM</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot" style="background:var(--green)"></div>
+              <div>
+                <div><strong>Jay</strong> commented on <strong>Alex Rivera</strong></div>
+                <div class="activity-time">Yesterday</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot" style="background:var(--blue)"></div>
+              <div>
+                <div><strong>Sr. Backend Engineer</strong> role rubric updated</div>
+                <div class="activity-time">Yesterday</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SHORTLIST VIEW ===== -->
+  <div id="view-shortlist" class="view-hidden">
+    <div class="topbar">
+      <h2>Shortlist Review</h2>
+      <div class="breadcrumb">CasperHire / Shortlist / <span>Sr. Backend Engineer</span></div>
+      <div class="topbar-actions">
+        <button class="btn">Re-score All</button>
+        <button class="btn btn-primary">Bulk Approve</button>
+      </div>
+    </div>
+    <div class="content">
+      <!-- Filters -->
+      <div class="filters-bar">
+        <div class="filter-chip active">All <span class="chip-count">12</span></div>
+        <div class="filter-chip">Score ≥ 7 <span class="chip-count">8</span></div>
+        <div class="filter-chip">Pending <span class="chip-count">5</span></div>
+        <div class="filter-chip">Flagged <span class="chip-count">2</span></div>
+        <div class="filter-chip">Deal-breaker <span class="chip-count">1</span></div>
+        <div style="margin-left:auto;font-size:12px;color:var(--text-muted);">Role: Sr. Backend Engineer ▾</div>
+      </div>
+
+      <!-- Table -->
+      <table class="shortlist-table">
+        <thead>
+          <tr>
+            <th style="width:32px"><input type="checkbox" class="row-check"></th>
+            <th>Candidate</th>
+            <th>AI Score</th>
+            <th>Parse</th>
+            <th>AI Rationale</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input type="checkbox" class="row-check"></td>
+            <td>
+              <span class="candidate-name">Maria Chen</span>
+              <span class="candidate-meta">5 yrs · Ex-Amazon · Distributed Systems</span>
+            </td>
+            <td><span class="score-badge score-high">9</span></td>
+            <td><span class="confidence-dot conf-high"></span>High</td>
+            <td><span class="rationale-text">5 years at Amazon building distributed systems directly aligns with senior backend requirement. Strong Kubernetes and Go experience.</span></td>
+            <td><span class="status-pill status-approved">Approved</span></td>
+            <td><button class="btn" style="font-size:11px;padding:4px 10px" onclick="showView('profile')">View</button></td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" class="row-check"></td>
+            <td>
+              <span class="candidate-name">Alex Rivera</span>
+              <span class="candidate-meta">7 yrs · Ex-Stripe · API Design</span>
+            </td>
+            <td><span class="score-badge score-high">9</span></td>
+            <td><span class="confidence-dot conf-high"></span>High</td>
+            <td><span class="rationale-text">Strong API design background at Stripe. Led team of 4 engineers. Deep Python and distributed systems experience matches rubric.</span></td>
+            <td><span class="status-pill status-pending">Pending</span></td>
+            <td><button class="btn" style="font-size:11px;padding:4px 10px">View</button></td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" class="row-check"></td>
+            <td>
+              <span class="candidate-name">James Park</span>
+              <span class="candidate-meta">4 yrs · Ex-Microsoft · Cloud Infra</span>
+            </td>
+            <td>
+              <span class="score-badge score-mid">8</span>
+              <div class="override-badge">AI: 6 → Leo: 8</div>
+            </td>
+            <td><span class="confidence-dot conf-high"></span>High</td>
+            <td><span class="rationale-text">Cloud infrastructure background. Slightly below experience threshold but Leo noted strong culture fit signal from portfolio.</span></td>
+            <td><span class="status-pill status-pending">Pending</span></td>
+            <td><button class="btn" style="font-size:11px;padding:4px 10px">View</button></td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" class="row-check"></td>
+            <td>
+              <span class="candidate-name">Priya Sharma</span>
+              <span class="candidate-meta">6 yrs · Ex-Google · ML Infra</span>
+            </td>
+            <td><span class="score-badge score-high">8</span></td>
+            <td><span class="confidence-dot conf-high"></span>High</td>
+            <td><span class="rationale-text">ML infrastructure at Google aligns with AI-native culture. Strong systems design. Less traditional backend but transferable skills.</span></td>
+            <td><span class="status-pill status-pending">Pending</span></td>
+            <td><button class="btn" style="font-size:11px;padding:4px 10px">View</button></td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" class="row-check"></td>
+            <td>
+              <span class="candidate-name">Sarah Kim</span>
+              <span class="candidate-meta">3 yrs · Startup · Full-stack</span>
+            </td>
+            <td><span class="score-badge score-mid">7</span></td>
+            <td><span class="confidence-dot conf-low"></span>Low</td>
+            <td><span class="rationale-text">Strong full-stack experience at early-stage startup. Below experience range but shows rapid growth trajectory. Parse flagged: multi-column resume layout.</span></td>
+            <td><span class="status-pill status-flagged">Flagged</span></td>
+            <td><button class="btn" style="font-size:11px;padding:4px 10px">View</button></td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" class="row-check"></td>
+            <td>
+              <span class="candidate-name">David Torres</span>
+              <span class="candidate-meta">8 yrs · Ex-Netflix · Platform Eng</span>
+            </td>
+            <td><span class="score-badge score-mid">7</span></td>
+            <td><span class="confidence-dot conf-high"></span>High</td>
+            <td><span class="rationale-text">Deep platform engineering at Netflix. Overqualified for level but may not accept comp range. Strong technical signal.</span></td>
+            <td><span class="status-pill status-flagged">Flagged</span></td>
+            <td><button class="btn" style="font-size:11px;padding:4px 10px">View</button></td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" class="row-check"></td>
+            <td>
+              <span class="candidate-name">Emily Watson</span>
+              <span class="candidate-meta">4 yrs · Accenture · Java/Spring</span>
+            </td>
+            <td><span class="score-badge score-mid">6</span></td>
+            <td><span class="confidence-dot conf-high"></span>High</td>
+            <td><span class="rationale-text">Consulting background with Java/Spring stack. Limited exposure to cloud-native or distributed systems. Solid fundamentals.</span></td>
+            <td><span class="status-pill status-pending">Pending</span></td>
+            <td><button class="btn" style="font-size:11px;padding:4px 10px">View</button></td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" class="row-check"></td>
+            <td>
+              <span class="candidate-name">Mike Johnson</span>
+              <span class="candidate-meta">2 yrs · Bootcamp · JavaScript</span>
+            </td>
+            <td><span class="score-badge score-low">3</span></td>
+            <td><span class="confidence-dot conf-high"></span>High</td>
+            <td><span class="rationale-text">Below experience threshold. JavaScript-only background doesn't match backend systems requirement. No distributed systems exposure.</span></td>
+            <td><span class="status-pill status-rejected">Rejected</span></td>
+            <td><button class="btn" style="font-size:11px;padding:4px 10px">View</button></td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" class="row-check"></td>
+            <td>
+              <span class="candidate-name">Lisa Zhang</span>
+              <span class="candidate-meta">1 yr · No degree listed</span>
+            </td>
+            <td><span class="score-badge score-low">1</span></td>
+            <td><span class="confidence-dot conf-high"></span>High</td>
+            <td><span class="rationale-text">⚠ Deal-breaker: Less than 2 years experience (minimum requirement). Auto-flagged.</span></td>
+            <td><span class="status-pill status-rejected">Rejected</span></td>
+            <td><button class="btn" style="font-size:11px;padding:4px 10px">View</button></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div style="margin-top:16px;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--text-muted);">
+        <div>Showing 9 of 12 candidates · 3 scoring failures in separate queue</div>
+        <div>Page 1 of 1</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== CANDIDATE PROFILE VIEW ===== -->
+  <div id="view-profile" class="view-hidden">
+    <div class="topbar">
+      <h2>Candidate Profile</h2>
+      <div class="breadcrumb">CasperHire / Shortlist / Sr. Backend Engineer / <span>Maria Chen</span></div>
+      <div class="topbar-actions">
+        <button class="btn" onclick="showView('shortlist')">← Back to Shortlist</button>
+      </div>
+    </div>
+    <div class="content">
+      <div class="profile-layout">
+        <!-- Left: profile sidebar -->
+        <div>
+          <div class="profile-sidebar-card" style="position:relative;">
+            <button class="btn" style="position:absolute;top:12px;right:12px;font-size:11px;padding:4px 10px;">✏ Edit</button>
+            <div class="profile-avatar">MC</div>
+            <div class="profile-name">Maria Chen</div>
+            <div class="profile-headline">Senior Software Engineer · Ex-Amazon</div>
+            <span class="status-pill status-approved" style="margin-bottom:16px;">Approved</span>
+
+            <div class="profile-score-row">
+              <div class="profile-score-item">
+                <div class="ps-value" style="color:var(--green)">9</div>
+                <div class="ps-label">AI Score</div>
+              </div>
+              <div class="profile-score-item">
+                <div class="ps-value">—</div>
+                <div class="ps-label">Interview</div>
+              </div>
+              <div class="profile-score-item">
+                <div class="ps-value">—</div>
+                <div class="ps-label">Aggregate</div>
+              </div>
+            </div>
+
+            <div class="profile-detail-row">
+              <span class="profile-detail-label">Parse Confidence</span>
+              <span class="profile-detail-value"><span class="confidence-dot conf-high"></span>High</span>
+            </div>
+            <div class="profile-detail-row">
+              <span class="profile-detail-label">Applied For</span>
+              <span class="profile-detail-value">Sr. Backend Eng</span>
+            </div>
+            <div class="profile-detail-row">
+              <span class="profile-detail-label">Pipeline Stage</span>
+              <span class="profile-detail-value">Screened — Approved</span>
+            </div>
+            <div class="profile-detail-row">
+              <span class="profile-detail-label">Screened</span>
+              <span class="profile-detail-value" style="font-family:var(--mono);">Apr 8, 2026</span>
+            </div>
+            <div class="profile-detail-row">
+              <span class="profile-detail-label">Email</span>
+              <span class="profile-detail-value">m.chen&#64;email.com</span>
+            </div>
+            <div class="profile-detail-row">
+              <span class="profile-detail-label">Phone</span>
+              <span class="profile-detail-value" style="font-family:var(--mono);">+1 (206) 555-0147</span>
+            </div>
+            <div class="profile-detail-row">
+              <span class="profile-detail-label">Override</span>
+              <span class="profile-detail-value">None</span>
+            </div>
+
+            <div class="profile-actions">
+              <button class="btn btn-approve" style="flex:1;display:flex;flex-direction:column;align-items:center;padding:10px 8px;gap:2px;"><span style="font-size:18px;">✓</span><span style="font-size:11px;">Approve</span></button>
+              <button class="btn btn-flag" style="flex:1;display:flex;flex-direction:column;align-items:center;padding:10px 8px;gap:2px;"><span style="font-size:18px;">⚑</span><span style="font-size:11px;">Flag</span></button>
+              <button class="btn btn-reject" style="flex:1;display:flex;flex-direction:column;align-items:center;padding:10px 8px;gap:2px;"><span style="font-size:18px;">✕</span><span style="font-size:11px;">Reject</span></button>
+            </div>
+          </div>
+
+          <!-- Resume download -->
+          <div class="card" style="margin-top:16px;">
+            <div class="card-body" style="padding:14px 20px;display:flex;align-items:center;justify-content:space-between;">
+              <div style="font-size:12px;font-weight:600;">📄 Maria_Chen_Resume.pdf</div>
+              <button class="btn" style="font-size:11px;padding:4px 10px;">Download</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: main content -->
+        <div class="profile-main-col">
+          <!-- AI Rationale -->
+          <div class="rationale-card">
+            <div class="card-header">
+              <h3>AI Screening Rationale</h3>
+              <div class="card-meta">Score: 9/10 · Scored Apr 8, 2026</div>
+            </div>
+            <div class="rationale-body">
+              5 years at Amazon building distributed systems directly aligns with the senior backend requirement. Strong Kubernetes and Go experience match the required skills rubric (40% weight). Education at University of Washington (CS, 2019) satisfies the qualification criteria. Candidate demonstrates progression from SDE I to SDE II within 2 years, indicating strong growth trajectory. No deal-breakers triggered.
+            </div>
+          </div>
+
+          <!-- Parsed Skills -->
+          <div class="card">
+            <div class="card-header">
+              <h3>Skills (Parsed)</h3>
+              <div class="card-meta">From structural parser</div>
+            </div>
+            <div class="card-body">
+              <span class="skill-tag">Go</span>
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">Kubernetes</span>
+              <span class="skill-tag">AWS</span>
+              <span class="skill-tag">Distributed Systems</span>
+              <span class="skill-tag">gRPC</span>
+              <span class="skill-tag">PostgreSQL</span>
+              <span class="skill-tag">Docker</span>
+              <span class="skill-tag">Terraform</span>
+              <span class="skill-tag">CI/CD</span>
+              <span class="skill-tag">Redis</span>
+              <span class="skill-tag">Kafka</span>
+            </div>
+          </div>
+
+          <!-- Experience (parsed) -->
+          <div class="card">
+            <div class="card-header">
+              <h3>Experience (Parsed)</h3>
+              <div class="card-meta">3 entries extracted</div>
+            </div>
+            <div class="card-body">
+              <div class="experience-entry">
+                <div class="exp-company">Amazon Web Services</div>
+                <div class="exp-title">Software Development Engineer II · Distributed Storage Team</div>
+                <div class="exp-dates">Jan 2023 — Present · 3 yrs</div>
+              </div>
+              <div class="experience-entry">
+                <div class="exp-company">Amazon</div>
+                <div class="exp-title">Software Development Engineer I · Retail Platform</div>
+                <div class="exp-dates">Jun 2021 — Dec 2022 · 1.5 yrs</div>
+              </div>
+              <div class="experience-entry">
+                <div class="exp-company">Tableau (Salesforce)</div>
+                <div class="exp-title">Software Engineering Intern</div>
+                <div class="exp-dates">Jun 2020 — Sep 2020 · 4 mo</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Education -->
+          <div class="card">
+            <div class="card-header">
+              <h3>Education (Parsed)</h3>
+            </div>
+            <div class="card-body">
+              <div class="exp-company">University of Washington</div>
+              <div class="exp-title">B.S. Computer Science</div>
+              <div class="exp-dates">2017 — 2021</div>
+            </div>
+          </div>
+
+          <!-- Activity log -->
+          <div class="card">
+            <div class="card-header">
+              <h3>Activity Log</h3>
+            </div>
+            <div class="card-body">
+              <div class="activity-item">
+                <div class="activity-dot" style="background:var(--green)"></div>
+                <div>
+                  <div><strong>Leo</strong> approved Maria → Phone Screen</div>
+                  <div class="activity-time">Apr 8, 2026 · 10:42 AM</div>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot" style="background:var(--orange)"></div>
+                <div>
+                  <div><strong>Leo</strong> edited parsed field — Skills: added <strong>"Terraform"</strong> (parser missed it)</div>
+                  <div class="activity-time">Apr 8, 2026 · 10:38 AM</div>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot" style="background:var(--blue)"></div>
+                <div>
+                  <div>AI screening complete — Score: <strong>9/10</strong></div>
+                  <div class="activity-time">Apr 8, 2026 · 9:31 AM</div>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot" style="background:var(--blue)"></div>
+                <div>
+                  <div>Resume parsed — <strong>High confidence</strong></div>
+                  <div class="activity-time">Apr 8, 2026 · 9:30 AM</div>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot" style="background:var(--blue)"></div>
+                <div>
+                  <div>Resume ingested — <strong>Maria_Chen_Resume.pdf</strong></div>
+                  <div class="activity-time">Apr 8, 2026 · 9:30 AM</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== ROLES VIEW ===== -->
+  <div id="view-roles" class="view-hidden">
+    <div class="topbar">
+      <h2>Roles</h2>
+      <div class="breadcrumb">CasperHire / <span>Roles</span></div>
+      <div class="topbar-actions">
+        <button class="btn btn-primary">+ New Role</button>
+      </div>
+    </div>
+    <div class="content" id="roles-list-content">
+      <table class="shortlist-table">
+        <thead>
+          <tr>
+            <th>Role</th>
+            <th>Department</th>
+            <th>Status</th>
+            <th>Candidates</th>
+            <th>Screened</th>
+            <th>Approved</th>
+            <th>Created</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="candidate-name">Sr. Backend Engineer</span>
+              <span class="candidate-meta">IC3 · Full-time · Remote</span>
+            </td>
+            <td>Engineering</td>
+            <td><span class="status-pill status-approved">Active</span></td>
+            <td style="font-family:var(--mono);font-weight:600;">127</td>
+            <td style="font-family:var(--mono);font-weight:600;">127</td>
+            <td style="font-family:var(--mono);font-weight:600;">42</td>
+            <td style="font-family:var(--mono);font-size:12px;color:var(--text-muted);">Mar 15, 2026</td>
+            <td><button class="btn" style="font-size:11px;padding:4px 10px" onclick="showView('role-detail')">View</button></td>
+          </tr>
+          <tr>
+            <td>
+              <span class="candidate-name">ML Engineer</span>
+              <span class="candidate-meta">IC3 · Full-time · Remote</span>
+            </td>
+            <td>Engineering</td>
+            <td><span class="status-pill status-pending">Draft</span></td>
+            <td style="font-family:var(--mono);font-weight:600;">0</td>
+            <td style="font-family:var(--mono);font-weight:600;">0</td>
+            <td style="font-family:var(--mono);font-weight:600;">0</td>
+            <td style="font-family:var(--mono);font-size:12px;color:var(--text-muted);">Apr 5, 2026</td>
+            <td><button class="btn" style="font-size:11px;padding:4px 10px">View</button></td>
+          </tr>
+          <tr>
+            <td>
+              <span class="candidate-name">Frontend Engineer</span>
+              <span class="candidate-meta">IC2 · Contract · Remote</span>
+            </td>
+            <td>Engineering</td>
+            <td><span class="status-pill status-flagged">Paused</span></td>
+            <td style="font-family:var(--mono);font-weight:600;">34</td>
+            <td style="font-family:var(--mono);font-weight:600;">34</td>
+            <td style="font-family:var(--mono);font-weight:600;">8</td>
+            <td style="font-family:var(--mono);font-size:12px;color:var(--text-muted);">Feb 20, 2026</td>
+            <td><button class="btn" style="font-size:11px;padding:4px 10px">View</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ===== ROLE DETAIL VIEW ===== -->
+  <div id="view-role-detail" class="view-hidden">
+    <div class="topbar">
+      <h2>Role Configuration</h2>
+      <div class="breadcrumb">CasperHire / Roles / <span>Sr. Backend Engineer</span></div>
+      <div class="topbar-actions">
+        <button class="btn" onclick="showView('roles')">← Back to Roles</button>
+        <button class="btn btn-primary">Edit Role</button>
+      </div>
+    </div>
+    <div class="content">
+      <div class="role-detail-grid">
+        <!-- Left column: Role info -->
+        <div>
+          <div class="card">
+            <div class="card-header">
+              <h3>Role Details</h3>
+              <span class="status-pill status-approved">Active</span>
+            </div>
+            <div class="card-body">
+              <div class="role-field">
+                <div class="role-field-label">Title</div>
+                <div class="role-field-value">Sr. Backend Engineer</div>
+              </div>
+              <div class="role-field">
+                <div class="role-field-label">Department</div>
+                <div class="role-field-value">Engineering</div>
+              </div>
+              <div class="role-field">
+                <div class="role-field-label">Level</div>
+                <div class="role-field-value">IC3 (Senior Individual Contributor)</div>
+              </div>
+              <div class="role-field">
+                <div class="role-field-label">Type</div>
+                <div class="role-field-value">Full-time · Remote</div>
+              </div>
+              <div class="role-field">
+                <div class="role-field-label">Experience Range</div>
+                <div class="role-field-value">3–8 years</div>
+              </div>
+              <div class="role-field">
+                <div class="role-field-label">Created</div>
+                <div class="role-field-value" style="font-family:var(--mono);">Mar 15, 2026</div>
+              </div>
+              <div class="role-field">
+                <div class="role-field-label">Last Modified</div>
+                <div class="role-field-value" style="font-family:var(--mono);">Apr 7, 2026</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Required Skills -->
+          <div class="card" style="margin-top:16px;">
+            <div class="card-header">
+              <h3>Required Skills</h3>
+            </div>
+            <div class="card-body">
+              <span class="skill-tag">Go</span>
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">Distributed Systems</span>
+              <span class="skill-tag">Cloud (AWS/GCP)</span>
+              <span class="skill-tag">PostgreSQL</span>
+              <span class="skill-tag">Docker/K8s</span>
+            </div>
+          </div>
+
+          <!-- Preferred Skills -->
+          <div class="card" style="margin-top:16px;">
+            <div class="card-header">
+              <h3>Preferred Qualifications</h3>
+            </div>
+            <div class="card-body">
+              <span class="skill-tag">Rust</span>
+              <span class="skill-tag">gRPC/Protobuf</span>
+              <span class="skill-tag">Kafka</span>
+              <span class="skill-tag">Terraform</span>
+              <span class="skill-tag">AI/ML exposure</span>
+              <span class="skill-tag">Startup experience</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right column: Rubric + deal-breakers -->
+        <div>
+          <div class="card">
+            <div class="card-header">
+              <h3>Scoring Rubric Weights</h3>
+              <div class="card-meta">Must sum to 100%</div>
+            </div>
+            <div class="card-body">
+              <div class="rubric-bar-row">
+                <div class="rubric-bar-label">Skills Match</div>
+                <div class="rubric-bar-track"><div class="rubric-bar-fill" style="width:40%"></div></div>
+                <div class="rubric-bar-pct">40%</div>
+              </div>
+              <div class="rubric-bar-row">
+                <div class="rubric-bar-label">Experience</div>
+                <div class="rubric-bar-track"><div class="rubric-bar-fill" style="width:30%"></div></div>
+                <div class="rubric-bar-pct">30%</div>
+              </div>
+              <div class="rubric-bar-row">
+                <div class="rubric-bar-label">Domain Fit</div>
+                <div class="rubric-bar-track"><div class="rubric-bar-fill" style="width:30%"></div></div>
+                <div class="rubric-bar-pct">30%</div>
+              </div>
+              <div style="text-align:right;font-size:11px;color:var(--text-muted);margin-top:8px;font-family:var(--mono);">Total: 100% ✓</div>
+            </div>
+          </div>
+
+          <!-- Deal-breakers -->
+          <div class="card" style="margin-top:16px;">
+            <div class="card-header">
+              <h3>Deal-Breakers (Auto-Reject)</h3>
+              <div class="card-meta">Triggers Score = 1</div>
+            </div>
+            <div class="card-body">
+              <span class="dealbreaker-tag">< 2 years experience</span>
+              <span class="dealbreaker-tag">No backend language proficiency</span>
+              <span class="dealbreaker-tag">No cloud platform experience</span>
+            </div>
+          </div>
+
+          <!-- Role stats -->
+          <div class="card" style="margin-top:16px;">
+            <div class="card-header">
+              <h3>Screening Stats</h3>
+            </div>
+            <div class="card-body">
+              <div class="role-field">
+                <div class="role-field-label">Total Screened</div>
+                <div class="role-field-value" style="font-family:var(--mono);">127 candidates</div>
+              </div>
+              <div class="role-field">
+                <div class="role-field-label">Approved Rate</div>
+                <div class="role-field-value" style="font-family:var(--mono);">33% (42 / 127)</div>
+              </div>
+              <div class="role-field">
+                <div class="role-field-label">Avg AI Score</div>
+                <div class="role-field-value" style="font-family:var(--mono);">5.8 / 10</div>
+              </div>
+              <div class="role-field">
+                <div class="role-field-label">Override Rate</div>
+                <div class="role-field-value" style="font-family:var(--mono);">18%</div>
+              </div>
+              <div class="role-field">
+                <div class="role-field-label">Deal-breaker Hits</div>
+                <div class="role-field-value" style="font-family:var(--mono);">14 candidates</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<div class="wireframe-badge">Wireframe · CasperHire v1.0</div>
+
+<script>
+const views = ['dashboard', 'shortlist', 'profile', 'roles', 'role-detail'];
+const navIds = ['nav-dashboard', 'nav-shortlist', null, 'nav-roles', null];
+
+function showView(view) {
+  views.forEach(v => {
+    const el = document.getElementById('view-' + v);
+    if (el) el.classList.toggle('view-hidden', v !== view);
+  });
+  // Update nav active states
+  ['nav-dashboard', 'nav-shortlist', 'nav-roles'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.classList.remove('active');
+  });
+  if (view === 'dashboard') document.getElementById('nav-dashboard').classList.add('active');
+  if (view === 'shortlist' || view === 'profile') document.getElementById('nav-shortlist').classList.add('active');
+  if (view === 'roles' || view === 'role-detail') document.getElementById('nav-roles').classList.add('active');
+}
+</script>
+
+</body>
+</html>
