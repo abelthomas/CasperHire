@@ -2,11 +2,13 @@
 
 Low-fidelity wireframes and user flow diagrams for **CasperHire**, an AI-powered internal recruiting platform concept. These assets were produced as part of a product management assessment, demonstrating AI-first rapid prototyping.
 
+All HTML files within this repo are accessible via https://abelthomas.github.io/CasperHire/ .
+
 ## What's Here
 
 ```
 ├── assets/
-│   └── wireframes/          # 7 user flow diagrams (HTML/SVG)
+│   └── flowcharts/          # 7 user flow diagrams (HTML/SVG)
 │       ├── flowchart-1-role-configuration.html
 │       ├── flowchart-2-resume-ingestion.html
 │       ├── flowchart-3-structural-parsing.html
@@ -21,6 +23,15 @@ Low-fidelity wireframes and user flow diagrams for **CasperHire**, an AI-powered
 
 Seven vertical flowcharts covering the resume screening feature pipeline — one per work breakdown section. Built with standard flowchart conventions (terminators, process blocks, decision diamonds, input parallelograms) and color-coded by node type.
 
+Viewable at: 
+1. https://abelthomas.github.io/CasperHire/assets/flowcharts/flowchart-1-role-configuration.html
+2. https://abelthomas.github.io/CasperHire/assets/flowcharts/flowchart-2-resume-ingestion.html
+3. https://abelthomas.github.io/CasperHire/assets/flowcharts/flowchart-3-structural-parsing.html 
+4. https://abelthomas.github.io/CasperHire/assets/flowcharts/flowchart-4-llm-scoring.html
+5. https://abelthomas.github.io/CasperHire/assets/flowcharts/flowchart-5-shortlist-review.html
+6. https://abelthomas.github.io/CasperHire/assets/flowcharts/flowchart-6-screening-analytics.html
+7. https://abelthomas.github.io/CasperHire/assets/flowcharts/flowchart-7-crm-handoff.html
+
 ### Interactive Prototype
 
 A single self-contained HTML file with 5 navigable views:
@@ -33,7 +44,7 @@ A single self-contained HTML file with 5 navigable views:
 
 **How to navigate:**
 
-1. Open `wireframe-prototype.html` in any browser — you'll land on the **Dashboard**.
+1. Open https://abelthomas.github.io/CasperHire/wireframe-prototype.html in any browser — you'll land on the **Dashboard**.
 2. Click **Shortlist** in the sidebar → candidate table. Click the **View** button on **Maria Chen** (top row) to open her profile card.
 3. Click **Roles** in the sidebar → roles table. Click the **View** button on **Sr. Backend Engineer** to see the full role configuration with rubric weights and deal-breakers.
 4. Each detail view has a **← Back** button in the top bar to return to its parent list.
